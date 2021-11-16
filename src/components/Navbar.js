@@ -29,7 +29,8 @@ function Navbar() {
     <>
       <nav className='navbar'>
         <h2>
-          MY WEBSITE
+          {/* MY WEBSITE */}
+          AMIBI
         </h2>
         <div className='menu-icon' onClick={handleClick}>
           <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
