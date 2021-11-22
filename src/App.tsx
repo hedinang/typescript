@@ -7,7 +7,7 @@ import Ar from './components/pages/Ar';
 import { Animation } from './components/pages/Animation';
 export default function App() {
   return (
-    <Router>
+    <Router >
       <Navbar />
       <Suspense fallback={null}>
         <Switch>

@@ -1,17 +1,39 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import './Navbar.css'
 import Dropdown from './Dropdown'
 
+
+
 function Navbar() {
   const [click, setClick] = useState(false)
   const [dropdown, setDropdown] = useState(false)
-
+  let [isShow, setIsShow] = useState('none')
+  let [responsive, setResponsive] = useState({
+    logo: 'left'
+  })
   const handleClick = () => setClick(!click)
   const closeMobileMenu = () => setClick(false)
+  let maxWidth = 960
+
+
+  useEffect(() => {
+    function handleResize() {
+      if (window.innerWidth < maxWidth) {
+        responsive.logo = 'left'
+      }
+      else {
+        responsive.logo = 'center'
+      }
+      setResponsive({ ...responsive })
+    }
+    window.addEventListener("resize", handleResize)
+    handleResize()
+  }, [])
+
 
   const onMouseEnter = () => {
-    if (window.innerWidth < 960) {
+    if (window.innerWidth < maxWidth) {
       setDropdown(false)
     } else {
       setDropdown(true)
@@ -19,46 +41,32 @@ function Navbar() {
   }
 
   const onMouseLeave = () => {
-    if (window.innerWidth < 960) {
-      setDropdown(false)
+    if (window.innerWidth < maxWidth) {
+      setDropdown(true)
     } else {
       setDropdown(false)
     }
   }
+  let onClick = (e) => {
+    if (window.innerWidth < maxWidth) {
+      if (isShow === 'none') setIsShow('block')
+      else setIsShow('none')
+    }
+  }
+
   return (
     <>
-      <nav className='navbar'>
-        <h2>
-          {/* MY WEBSITE */}
-          AMIBI
-        </h2>
+      <nav className='navbar' style={{ justifyContent: `${responsive.logo}` }}>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <img style={{ width: '4rem', borderRadius: '50%' }} src='./raccoon.webp' />
+          <h2>
+            PicoCat
+          </h2>
+        </div>
         <div className='menu-icon' onClick={handleClick}>
           <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
         </div>
-        <ul className={click ? 'nav-menu active' : 'nav-menu'}>
-          <li className='nav-item'>
-            <Link to='/' className='nav-links' onClick={closeMobileMenu}>
-              Home
-            </Link>
-          </li>
-          <li
-            className='nav-item'
-            onMouseEnter={onMouseEnter}
-            onMouseLeave={onMouseLeave}
-          >
-            Products <i className='fas fa-caret-down' />
-            {dropdown && <Dropdown />}
-          </li>
-          <li className='nav-item'>
-            <Link
-              to='/contact-us'
-              className='nav-links'
-              onClick={closeMobileMenu}
-            >
-              Contact Us
-            </Link>
-          </li>
-        </ul>
+        <Dropdown responsive={responsive.logo} click={click} />
       </nav>
     </>
   )

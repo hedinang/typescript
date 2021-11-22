@@ -1,11 +1,13 @@
 .navbar {
-  background: linear-gradient(90deg "white", 0%, rgb(26, 23, 23) 100%);
+  /* background: linear-gradient(90deg "white", 0%, rgb(26, 23, 23) 100%); */
+  background-color: #002a56;
   height: 80px;
   display: flex;
-  justify-content: center;
+
   align-items: center;
   font-size: 1.2rem;
   z-index: 1;
+  color: white;
 }
 /* ul table tr td{
   width: 100px;
@@ -27,7 +29,7 @@ td {
   font-size: 1.6rem;
 }
 
-.nav-menu {
+/* .nav-menu {
   display: grid;
   grid-template-columns: repeat(5, auto);
   grid-gap: 10px;
@@ -36,22 +38,27 @@ td {
   width: 50vw;
   justify-content: end;
   margin-right: 2rem;
+} */
+.nav-menu-hide {
+  display: none;
 }
 
 .nav-item {
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   height: 80px;
 }
 
 .nav-links {
-  color: black;
+  color: white;
   text-decoration: none;
   padding: 0.5rem 1rem;
 }
 
 .nav-links:hover {
-  background-color: white;
+  text-decoration: none;
+  color: white;
+  /* background-color: white; */
   border-radius: 4px;
   transition: all 0.2s ease-out;
 }
@@ -67,30 +74,49 @@ td {
 .menu-icon {
   display: none;
 }
-
+.test {
+  z-index: 1;
+}
 @media screen and (max-width: 960px) {
+  .deepLi {
+    color: white;
+    padding-left: 2rem;
+    list-style: none;
+  }
+
   .NavbarItems {
     position: relative;
   }
 
   .nav-menu {
+    background-color: #002a56;
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 90vh;
+    /* height: 90vh; */
     position: absolute;
     top: 80px;
     left: -100%;
     opacity: 1;
     transition: all 0.5s ease;
   }
-
-  .nav-menu.active {
-    background: #242222;
+  .test.active {
+    background: #002a56;
     left: 0;
     opacity: 1;
     transition: all 0.5s ease;
     z-index: 1;
+    list-style: none;
+  }
+  .nav-menu.active {
+    background: #002a56;
+    left: 0;
+    opacity: 1;
+    transition: all 0.5s ease;
+    z-index: 1;
+  }
+  .nav-links.active {
+    text-align: left;
   }
 
   .nav-links {
@@ -117,7 +143,7 @@ td {
     position: absolute;
     top: 0;
     right: 0;
-    transform: translate(-100%, 60%);
+    transform: translate(-100%, 35%);
     font-size: 1.8rem;
     cursor: pointer;
   }
@@ -145,8 +171,4 @@ td {
     color: #1888ff;
     transition: 250ms;
   }
-
-  /* button {
-    display: none;
-  } */
 }
